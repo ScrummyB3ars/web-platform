@@ -7,6 +7,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+import { Link } from 'react-router-dom';
 
 const styles = {
   root: {
@@ -21,8 +22,20 @@ const styles = {
   }
 };
 
+const renderLoginLogout = isAuthenticated => {
+  if (isAuthenticated) {
+    return <Button color="contrast">Logout</Button>;
+  } else {
+    return (
+      <Link to="/login">
+        <Button color="contrast">Login</Button>
+      </Link>
+    );
+  }
+};
+
 function ButtonAppBar(props) {
-  const { classes } = props;
+  const { classes, isAuthenticated } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -37,7 +50,7 @@ function ButtonAppBar(props) {
           <Typography type="title" color="inherit" className={classes.flex}>
             Toddlr Dashboard
           </Typography>
-          <Button color="contrast">Login</Button>
+          {renderLoginLogout(isAuthenticated)}
         </Toolbar>
       </AppBar>
     </div>
