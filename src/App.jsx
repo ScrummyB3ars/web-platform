@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import AppBar from './components/AppBar';
+import Home from './components/Home';
 import Login from './components/Login';
 import Subscribe from './components/Subscribe';
 import Tips from './components/Tips';
@@ -50,6 +51,7 @@ class App extends React.Component {
         <div>
           <AppBar isAuthenticated={isAuthenticated} />
           <div className="app">
+            <Route exact path="/" component={Home} />
             <Route path="/subscribe" component={Subscribe} />
             <Route
               path="/login"
@@ -61,7 +63,7 @@ class App extends React.Component {
                 />
               )}
             />
-            <PrivateRoute path="/tips" component={Tips} />
+            <PrivateRoute path="/tips/:id?" component={Tips} />
           </div>
         </div>
       </Router>

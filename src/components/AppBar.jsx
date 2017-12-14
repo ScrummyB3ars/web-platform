@@ -40,15 +40,8 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            color="contrast"
-            aria-label="Menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography type="title" color="inherit" className={classes.flex}>
-            Toddlr Dashboard
+            <Link to="/">Toddlr Dashboard </Link>
           </Typography>
           {renderLoginLogout(isAuthenticated)}
         </Toolbar>
