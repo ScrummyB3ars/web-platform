@@ -18,3 +18,7 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
+a {
+  text-decoration: none;
+}

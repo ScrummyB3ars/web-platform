@@ -22,7 +22,9 @@ class Login extends React.Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { from } = this.props.location.state || {
+      from: { pathname: '/tips' }
+    };
     const { isAuthenticated, login } = this.props;
     const { username, password } = this.state;
 
