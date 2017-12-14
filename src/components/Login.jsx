@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { Button, Input, Card, CardContent, FormControl } from 'material-ui';
 
 class Login extends React.Component {
   render() {
@@ -11,9 +12,18 @@ class Login extends React.Component {
     }
 
     return (
-      <div>
-        <p>Login</p>
-        <button onClick={login}>Log in</button>
+      <div className="login">
+        <Card className="login-card">
+          <FormControl>
+            <Input placeholder="Username" />
+          </FormControl>
+          <FormControl>
+            <Input placeholder="Password" inputProps={{ type: 'password' }} />
+          </FormControl>
+          <Button raised color="primary" onClick={login}>
+            Login
+          </Button>
+        </Card>
       </div>
     );
   }

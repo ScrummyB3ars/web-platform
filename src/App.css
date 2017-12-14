@@ -3,3 +3,18 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  margin-top: 3em;
+  height: 30vh;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
