@@ -36,7 +36,7 @@ class App extends React.Component {
     };
   }
 
-  login = () => {
+  login = (username, password) => {
     fakeAuth.authenticate(() => {
       this.setState({ isAuthenticated: true });
     });
