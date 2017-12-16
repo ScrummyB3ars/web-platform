@@ -19,7 +19,11 @@ export default () => {
         </div>
       </div>
       <div className="home-content">
-        <Button raised color="primary">
+        <Button
+          raised
+          color="primary"
+          href="https://www.facebook.com/DemoKleuter-1696133033770644/"
+        >
           Contact our messenger bot
         </Button>
         <Link to="/subscribe">
