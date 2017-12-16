@@ -6,26 +6,33 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import { Link } from 'react-router-dom';
+import Dashboard from 'material-ui-icons/Dashboard';
 
-const styles = {
+const styles = theme => ({
   root: {
     width: '100%'
   },
   flex: {
     flex: 1
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+  leftIcon: {
+    marginRight: theme.spacing.unit
   }
-};
+});
 
-const renderLoginLogout = (isAuthenticated, logout) => {
+const renderLoginLogout = (isAuthenticated, logout, classes) => {
   if (isAuthenticated) {
     return (
-      <Button onClick={logout} color="contrast">
-        Logout
-      </Button>
+      <div style={{ display: 'flex', alignItems: 'centers' }}>
+        <Link to="/tips">
+          <Button color="contrast">
+            <Dashboard className={classes.leftIcon} /> Dashboard
+          </Button>
+        </Link>
+        <Button onClick={logout} color="contrast">
+          Logout
+        </Button>
+      </div>
     );
   } else {
     return (
@@ -43,9 +50,9 @@ function ButtonAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography type="title" color="inherit" className={classes.flex}>
-            <Link to="/">Toddlr Dashboard </Link>
+            <Link to="/">Toddlr</Link>
           </Typography>
-          {renderLoginLogout(isAuthenticated, logout)}
+          {renderLoginLogout(isAuthenticated, logout, classes)}
         </Toolbar>
       </AppBar>
     </div>
