@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "gh-pages": "^1.1.0",
+    "js-sha256": "^0.8.0",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.2.0",
