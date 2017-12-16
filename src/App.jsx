@@ -8,15 +8,17 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Subscribe from './components/Subscribe';
 import Tips from './components/Tips';
+import TipDetail from './components/Tips/TipDetail';
 
-import { fakeAuth } from './utils/AuthService';
+import { authService } from './utils/AuthService';
 import { requestService } from './utils/RequestService';
+import { getCookie } from './utils/Cookie';
 
 const PrivateRoute = ({ component: Component, addedProps, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      fakeAuth.isAuthenticated ? (
+      authService.isAuthenticated ? (
         <Component {...addedProps} {...props} />
       ) : (
         <Redirect
@@ -35,28 +37,43 @@ class App extends React.Component {
     super(props);
     this.state = {
       isAuthenticated: false,
-      tips: null
+      themeTips: null,
+      interactionTips: null
     };
   }
 
-  login = (username, password) => {
-    fakeAuth.authenticate(() => {
+  componentWillMount() {
+    // Login with cookie
+    const email = getCookie('email');
+    const password = getCookie('password');
+    if (email && password) {
+      this.login(email, password);
+    }
+  }
+
+  login = (username, password, remember) => {
+    authService.authenticate(username, password, remember, () => {
       this.setState({ isAuthenticated: true });
     });
   };
 
   logout = () => {
-    fakeAuth.signout(() => {
+    authService.signout(() => {
       this.setState({ isAuthenticated: false });
     });
   };
 
   getAllTips = () => {
-    requestService.getAllTips().then(json => this.setState({ tips: json }));
+    requestService
+      .getThemeTips()
+      .then(json => this.setState({ themeTips: json }));
+    requestService
+      .getInteractionTips()
+      .then(json => this.setState({ interactionTips: json }));
   };
 
   render() {
-    const { isAuthenticated, tips } = this.state;
+    const { isAuthenticated, themeTips, interactionTips } = this.state;
 
     return (
       <Router>
@@ -76,10 +93,17 @@ class App extends React.Component {
               )}
             />
             <PrivateRoute
-              path="/tips/:id?"
+              exact
+              path="/tips"
               component={Tips}
-              addedProps={{ getAllTips: this.getAllTips, tips }}
+              addedProps={{
+                getAllTips: this.getAllTips,
+                themeTips,
+                interactionTips
+              }}
             />
+            <PrivateRoute path="/tips/theme/:id" component={TipDetail} />
+            <PrivateRoute path="/tips/interaction/:id" component={TipDetail} />
           </div>
         </div>
       </Router>

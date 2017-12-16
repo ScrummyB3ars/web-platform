@@ -1,19 +1,27 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Button, Input, Card, FormControl } from 'material-ui';
+import {
+  Button,
+  Input,
+  Card,
+  Checkbox,
+  FormControl,
+  FormControlLabel
+} from 'material-ui';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: null,
-      password: null
+      password: null,
+      remember: false
     };
   }
 
   handleInputChange(event) {
     const target = event.target;
-    const value = target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
@@ -21,12 +29,22 @@ class Login extends React.Component {
     });
   }
 
+  onSubmit(e) {
+    e.preventDefault();
+
+    const { username, password, remember } = this.state;
+
+    if (username && password) {
+      this.props.login(username, password, remember);
+    }
+  }
+
   render() {
     const { from } = this.props.location.state || {
       from: { pathname: '/tips' }
     };
-    const { isAuthenticated, login } = this.props;
-    const { username, password } = this.state;
+    const { isAuthenticated } = this.props;
+    const { remember } = this.state;
 
     if (isAuthenticated) {
       return <Redirect to={from} />;
@@ -34,34 +52,49 @@ class Login extends React.Component {
 
     return (
       <div className="container-center-items">
-        <Card className="login-card">
-          <FormControl>
-            <Input
-              placeholder="Username"
-              inputProps={{
-                name: 'username',
-                onChange: e => this.handleInputChange(e)
-              }}
-            />
-          </FormControl>
-          <FormControl>
-            <Input
-              placeholder="Password"
-              inputProps={{
-                name: 'password',
-                type: 'password',
-                onChange: e => this.handleInputChange(e)
-              }}
-            />
-          </FormControl>
-          <Button
-            raised
-            color="primary"
-            onClick={() => login(username, password)}
-          >
-            Login
-          </Button>
-        </Card>
+        <form>
+          <Card className="login-card">
+            <FormControl>
+              <Input
+                placeholder="Username"
+                inputProps={{
+                  name: 'username',
+                  onChange: e => this.handleInputChange(e)
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <Input
+                placeholder="Password"
+                inputProps={{
+                  name: 'password',
+                  type: 'password',
+                  onChange: e => this.handleInputChange(e)
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={remember}
+                    name="remember"
+                    onChange={e => this.handleInputChange(e)}
+                  />
+                }
+                label="Remember me"
+              />
+            </FormControl>
+            <Button
+              type="submit"
+              raised
+              color="primary"
+              onClick={e => this.onSubmit(e)}
+            >
+              Login
+            </Button>
+          </Card>
+        </form>
       </div>
     );
   }

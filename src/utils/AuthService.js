@@ -1,11 +1,35 @@
-export const fakeAuth = {
+import { requestService } from './RequestService';
+import { setCookie } from './Cookie';
+import { sha256 } from 'js-sha256';
+
+export const authService = {
   isAuthenticated: false,
-  authenticate(cb) {
+  authenticate(email, password, remember, cb) {
     this.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
+    requestService.getUser(email).then(json => {
+      const user = json;
+      if (user.password === sha256(password)) {
+        // THIS IS NOT SAFE
+        // SET A TOKEN RETURNED FROM THE SERVER INSTEAD
+        // THIS IS FOR DEMO PURPOSES ONLY
+        if (remember) {
+          setCookie('email', email, 365);
+          setCookie('password', password, 365);
+        } else {
+          // session only
+          setCookie('email', email);
+          setCookie('password', password);
+        }
+        cb();
+      } else {
+        // AUTH FAILED
+      }
+    });
   },
   signout(cb) {
     this.isAuthenticated = false;
-    setTimeout(cb, 100);
+    setCookie('email', '', -1);
+    setCookie('password', '', -1);
+    cb();
   }
 };
