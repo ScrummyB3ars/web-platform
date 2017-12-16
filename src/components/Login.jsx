@@ -57,6 +57,7 @@ class Login extends React.Component {
             <FormControl>
               <Input
                 placeholder="Username"
+                autoComplete
                 inputProps={{
                   name: 'username',
                   onChange: e => this.handleInputChange(e)
@@ -66,6 +67,7 @@ class Login extends React.Component {
             <FormControl>
               <Input
                 placeholder="Password"
+                autoComplete
                 inputProps={{
                   name: 'password',
                   type: 'password',
