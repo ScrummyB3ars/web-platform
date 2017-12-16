@@ -77,7 +77,6 @@ class TipTable extends React.Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell numeric>ID</TableCell>
               <TableCell>Content</TableCell>
               <TableCell />
             </TableRow>
@@ -88,7 +87,6 @@ class TipTable extends React.Component {
               .map(t => {
                 return (
                   <TableRow key={t.id}>
-                    <TableCell numeric>{t.id}</TableCell>
                     <TableCell>{t.tip_content}</TableCell>
                     <TableCell>
                       <Link
