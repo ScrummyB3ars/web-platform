@@ -14,5 +14,18 @@ export const requestService = {
     return fetch(`${this.URL}/users`)
       .then(response => response.json())
       .then(json => json.filter(u => u.email === email)[0]);
+  },
+  subscribeUser(email, zip_code) {
+    fetch(`${this.URL}/users/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: '',
+        email,
+        zip_code
+      })
+    });
   }
 };
