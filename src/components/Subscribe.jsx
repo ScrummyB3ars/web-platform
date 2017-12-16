@@ -10,17 +10,11 @@ export default () => {
             <Input
               placeholder="Email"
               inputProps={{
-                name: 'email',
-                onChange: e => this.handleInputChange(e)
+                name: 'email'
               }}
             />
           </FormControl>
-          <Button
-            type="submit"
-            raised
-            color="primary"
-            onClick={e => this.onSubmit(e)}
-          >
+          <Button type="submit" raised color="primary">
             Register
           </Button>
         </Card>
