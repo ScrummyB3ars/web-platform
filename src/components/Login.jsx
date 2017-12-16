@@ -33,7 +33,7 @@ class Login extends React.Component {
     }
 
     return (
-      <div className="login">
+      <div className="container-center-items">
         <Card className="login-card">
           <FormControl>
             <Input

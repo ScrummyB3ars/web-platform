@@ -10,13 +10,14 @@ import Subscribe from './components/Subscribe';
 import Tips from './components/Tips';
 
 import { fakeAuth } from './utils/AuthService';
+import { requestService } from './utils/RequestService';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, addedProps, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       fakeAuth.isAuthenticated ? (
-        <Component {...props} />
+        <Component {...addedProps} {...props} />
       ) : (
         <Redirect
           to={{
@@ -33,7 +34,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: false,
+      tips: null
     };
   }
 
@@ -43,8 +45,12 @@ class App extends React.Component {
     });
   };
 
+  getAllTips = () => {
+    console.log(requestService.getAllTips());
+  };
+
   render() {
-    const { isAuthenticated } = this.state;
+    const { isAuthenticated, tips } = this.state;
 
     return (
       <Router>
@@ -63,7 +69,11 @@ class App extends React.Component {
                 />
               )}
             />
-            <PrivateRoute path="/tips/:id?" component={Tips} />
+            <PrivateRoute
+              path="/tips/:id?"
+              component={Tips}
+              addedProps={{ getAllTips: this.getAllTips, tips }}
+            />
           </div>
         </div>
       </Router>
