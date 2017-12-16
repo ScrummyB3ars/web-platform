@@ -8,20 +8,41 @@ import Table, {
   TableFooter,
   TablePagination
 } from 'material-ui/Table';
+import IconButton from 'material-ui/IconButton';
 import { Button, Toolbar, Typography } from 'material-ui';
 import Paper from 'material-ui/Paper';
+import DeleteIcon from 'material-ui-icons/Delete';
+import EditIcon from 'material-ui-icons/Edit';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from 'material-ui/Dialog';
 import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3
+  },
+  deleteIcon: {
+    color: 'red'
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    color: '#fff'
   }
 });
 
 class TipTable extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { page: 0, rowsPerPage: 5 };
+    this.state = {
+      page: 0,
+      rowsPerPage: 5,
+      dialogOpen: false,
+      dialogTip: null
+    };
   }
 
   handleChangePage = (event, page) => {
@@ -32,9 +53,21 @@ class TipTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  handleDialogOpen = dialogTip => {
+    this.setState({ dialogOpen: true, dialogTip });
+  };
+
+  handleDialogClose = () => {
+    this.setState({ dialogOpen: false });
+  };
+
+  handleTipDelete = () => {
+    // DELETE TIP
+  };
+
   render() {
     const { classes, tips, title, type } = this.props;
-    const { page, rowsPerPage } = this.state;
+    const { page, rowsPerPage, dialogOpen, dialogTip } = this.state;
 
     return (
       <Paper className={`${classes.root} tips-table`}>
@@ -58,17 +91,19 @@ class TipTable extends React.Component {
                     <TableCell numeric>{t.id}</TableCell>
                     <TableCell>{t.tip_content}</TableCell>
                     <TableCell>
-                      <Button onClick={() => this.onDelete(t.id)}>
-                        Delete
-                      </Button>
                       <Link
                         to={{
                           pathname: `/tips/${type}/${t.id}`,
                           state: { tip: t }
                         }}
                       >
-                        <Button>Detail</Button>
+                        <IconButton>
+                          <EditIcon />
+                        </IconButton>
                       </Link>
+                      <IconButton onClick={() => this.handleDialogOpen(t)}>
+                        <DeleteIcon className={classes.deleteIcon} />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 );
@@ -86,6 +121,26 @@ class TipTable extends React.Component {
             </TableRow>
           </TableFooter>
         </Table>
+        <Dialog open={dialogOpen} onRequestClose={this.handleDialogClose}>
+          <DialogTitle>Delete this tip?</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {dialogTip && dialogTip.tip_content}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              raised
+              onClick={this.handleTipDelete}
+              className={classes.deleteButton}
+            >
+              Delete
+            </Button>
+            <Button onClick={this.handleDialogClose} color="primary" autoFocus>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Paper>
     );
   }
