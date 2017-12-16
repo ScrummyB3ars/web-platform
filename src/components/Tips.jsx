@@ -19,8 +19,6 @@ const styles = theme => ({
   }
 });
 
-const data = [{ id: 0, content: 'Zever' }, { id: 1, content: 'Meer zever' }];
-
 class Tips extends React.Component {
   componentWillMount() {
     this.props.getAllTips();
@@ -52,14 +50,14 @@ class Tips extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(n => {
+            {tips.map(t => {
               return (
-                <TableRow key={n.id}>
-                  <TableCell numeric>{n.id}</TableCell>
-                  <TableCell>{n.content}</TableCell>
+                <TableRow key={t.id}>
+                  <TableCell numeric>{t.id}</TableCell>
+                  <TableCell>{t.tip_content}</TableCell>
                   <TableCell>
-                    <Button onClick={() => this.onDelete(n.id)}>Delete</Button>
-                    <Link to={`/tips/${n.id}`}>
+                    <Button onClick={() => this.onDelete(t.id)}>Delete</Button>
+                    <Link to={`/tips/${t.id}`}>
                       <Button>Detail</Button>
                     </Link>
                   </TableCell>
