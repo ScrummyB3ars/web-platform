@@ -46,7 +46,7 @@ class App extends React.Component {
   };
 
   getAllTips = () => {
-    console.log(requestService.getAllTips());
+    requestService.getAllTips().then(json => this.setState({ tips: json }));
   };
 
   render() {
