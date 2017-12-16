@@ -22,9 +22,13 @@ const styles = {
   }
 };
 
-const renderLoginLogout = isAuthenticated => {
+const renderLoginLogout = (isAuthenticated, logout) => {
   if (isAuthenticated) {
-    return <Button color="contrast">Logout</Button>;
+    return (
+      <Button onClick={logout} color="contrast">
+        Logout
+      </Button>
+    );
   } else {
     return (
       <Link to="/login">
@@ -35,7 +39,7 @@ const renderLoginLogout = isAuthenticated => {
 };
 
 function ButtonAppBar(props) {
-  const { classes, isAuthenticated } = props;
+  const { classes, isAuthenticated, logout } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -43,7 +47,7 @@ function ButtonAppBar(props) {
           <Typography type="title" color="inherit" className={classes.flex}>
             <Link to="/">Toddlr Dashboard </Link>
           </Typography>
-          {renderLoginLogout(isAuthenticated)}
+          {renderLoginLogout(isAuthenticated, logout)}
         </Toolbar>
       </AppBar>
     </div>

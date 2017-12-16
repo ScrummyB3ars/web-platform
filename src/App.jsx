@@ -45,6 +45,12 @@ class App extends React.Component {
     });
   };
 
+  logout = () => {
+    fakeAuth.signout(() => {
+      this.setState({ isAuthenticated: false });
+    });
+  };
+
   getAllTips = () => {
     requestService.getAllTips().then(json => this.setState({ tips: json }));
   };
@@ -55,7 +61,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <AppBar isAuthenticated={isAuthenticated} />
+          <AppBar isAuthenticated={isAuthenticated} logout={this.logout} />
           <div className="app">
             <Route exact path="/" component={Home} />
             <Route path="/subscribe" component={Subscribe} />
