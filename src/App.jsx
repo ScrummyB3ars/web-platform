@@ -52,7 +52,7 @@ class App extends React.Component {
   }
 
   login = (username, password, remember) => {
-    authService.authenticate(username, password, remember, () => {
+    return authService.authenticate(username, password, remember, () => {
       this.setState({ isAuthenticated: true });
     });
   };
@@ -102,8 +102,7 @@ class App extends React.Component {
                 interactionTips
               }}
             />
-            <PrivateRoute path="/tips/theme/:id" component={TipDetail} />
-            <PrivateRoute path="/tips/interaction/:id" component={TipDetail} />
+            <PrivateRoute path="/tips/:type/:id" component={TipDetail} />
           </div>
         </div>
       </Router>

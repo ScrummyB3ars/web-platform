@@ -2,7 +2,6 @@ import React from 'react';
 import { CircularProgress } from 'material-ui/Progress';
 import { withStyles } from 'material-ui/styles';
 
-import TipDetail from './TipDetail';
 import Table from './Table';
 
 const styles = theme => ({
@@ -17,12 +16,7 @@ class Tips extends React.Component {
   }
 
   render() {
-    const {
-      classes,
-      themeTips,
-      interactionTips,
-      match: { params: { id } }
-    } = this.props;
+    const { classes, themeTips, interactionTips } = this.props;
 
     if (!themeTips || !interactionTips) {
       return (
@@ -30,10 +24,6 @@ class Tips extends React.Component {
           <CircularProgress className={classes.progress} size={50} />
         </div>
       );
-    }
-
-    if (id) {
-      return <TipDetail />;
     }
 
     return (
