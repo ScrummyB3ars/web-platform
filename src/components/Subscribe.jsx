@@ -45,7 +45,7 @@ class Subscribe extends React.Component {
             <FormControl>
               <Input
                 placeholder="Zipcode"
-                numeric
+                numeric="true"
                 inputProps={{
                   onChange: e => this.handleInputChange(e),
                   name: 'zip_code'
