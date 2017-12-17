@@ -5,13 +5,13 @@ import { sha256 } from 'js-sha256';
 export const authService = {
   isAuthenticated: false,
   authenticate(email, password, remember, cb) {
-    this.isAuthenticated = true;
-    requestService.getUser(email).then(json => {
+    return requestService.getUser(email).then(json => {
       const user = json;
       if (!user) {
         return false;
       }
       if (user.password === sha256(password)) {
+        this.isAuthenticated = true;
         // THIS IS NOT SAFE
         // SET A TOKEN RETURNED FROM THE SERVER INSTEAD
         // THIS IS FOR DEMO PURPOSES ONLY
@@ -23,7 +23,7 @@ export const authService = {
           setCookie('email', email);
           setCookie('password', password);
         }
-        cb();
+        return cb();
       } else {
         return false;
       }

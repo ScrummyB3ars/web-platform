@@ -52,9 +52,11 @@ class App extends React.Component {
   }
 
   login = (username, password, remember) => {
-    return authService.authenticate(username, password, remember, () => {
-      this.setState({ isAuthenticated: true });
-    });
+    return authService
+      .authenticate(username, password, remember, () => {
+        this.setState({ isAuthenticated: true });
+      })
+      .then(success => success);
   };
 
   logout = () => {

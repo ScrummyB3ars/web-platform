@@ -37,8 +37,12 @@ class Login extends React.Component {
     const { username, password, remember } = this.state;
 
     if (username && password) {
-      this.setState({
-        failed: !this.props.login(username, password, remember)
+      this.props.login(username, password, remember).then(() => {
+        if (!this.props.isAuthenticated) {
+          this.setState({
+            failed: true
+          });
+        }
       });
     } else {
       this.setState({ failed: true });
