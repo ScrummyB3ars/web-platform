@@ -6,7 +6,8 @@ import {
   Card,
   Checkbox,
   FormControl,
-  FormControlLabel
+  FormControlLabel,
+  FormHelperText
 } from 'material-ui';
 
 class Login extends React.Component {
@@ -15,7 +16,8 @@ class Login extends React.Component {
     this.state = {
       username: null,
       password: null,
-      remember: false
+      remember: false,
+      failed: false
     };
   }
 
@@ -35,7 +37,11 @@ class Login extends React.Component {
     const { username, password, remember } = this.state;
 
     if (username && password) {
-      this.props.login(username, password, remember);
+      this.setState({
+        failed: !this.props.login(username, password, remember)
+      });
+    } else {
+      this.setState({ failed: true });
     }
   }
 
@@ -44,7 +50,7 @@ class Login extends React.Component {
       from: { pathname: '/tips' }
     };
     const { isAuthenticated } = this.props;
-    const { remember } = this.state;
+    const { remember, failed } = this.state;
 
     if (isAuthenticated) {
       return <Redirect to={from} />;
@@ -54,6 +60,13 @@ class Login extends React.Component {
       <div className="container-center-items">
         <form>
           <Card className="login-card">
+            {failed ? (
+              <FormControl error>
+                <FormHelperText>Invalid email or password</FormHelperText>
+              </FormControl>
+            ) : (
+              ''
+            )}
             <FormControl>
               <Input
                 placeholder="Username"

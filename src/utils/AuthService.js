@@ -8,6 +8,9 @@ export const authService = {
     this.isAuthenticated = true;
     requestService.getUser(email).then(json => {
       const user = json;
+      if (!user) {
+        return false;
+      }
       if (user.password === sha256(password)) {
         // THIS IS NOT SAFE
         // SET A TOKEN RETURNED FROM THE SERVER INSTEAD
@@ -22,7 +25,7 @@ export const authService = {
         }
         cb();
       } else {
-        // AUTH FAILED
+        return false;
       }
     });
   },

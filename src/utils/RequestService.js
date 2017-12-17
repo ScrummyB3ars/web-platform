@@ -22,7 +22,7 @@ export const requestService = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: '',
+        username: 'test',
         email,
         zip_code
       })
