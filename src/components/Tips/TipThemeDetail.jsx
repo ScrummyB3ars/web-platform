@@ -5,7 +5,7 @@ import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 
 export default props => {
-  const { tip } = props;
+  const { tip, themes } = props;
   return (
     <div>
       <TextField
@@ -40,6 +40,9 @@ export default props => {
           Wolken, kans op neerslag
         </MenuItem>
         <MenuItem value="memen">Memen</MenuItem>
+      </Select>
+      <Select value={tip.themes_id} input={<Input name="themes" />}>
+        {themes.map(th => <MenuItem value={th.id}>{th.name}</MenuItem>)}
       </Select>
     </div>
   );

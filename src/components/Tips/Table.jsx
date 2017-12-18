@@ -101,7 +101,7 @@ class TipTable extends React.Component {
                         <Link
                           to={{
                             pathname: `/tips/${type}/${t.id}`,
-                            state: { tip: t }
+                            state: { tip: t, themes }
                           }}
                         >
                           <IconButton>

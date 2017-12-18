@@ -5,9 +5,9 @@ import TipInteractionDetail from './TipInteractionDetail';
 
 export default props => {
   const { match: { params: { type } } } = props;
-  const { tip } = props.location.state;
+  const { tip, themes } = props.location.state;
   return type === 'theme' ? (
-    <TipThemeDetail tip={tip} />
+    <TipThemeDetail tip={tip} themes={themes} />
   ) : (
     <TipInteractionDetail tip={tip} />
   );
