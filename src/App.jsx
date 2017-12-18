@@ -38,6 +38,7 @@ class App extends React.Component {
     this.state = {
       isAuthenticated: false,
       themeTips: null,
+      themes: null,
       interactionTips: null
     };
   }
@@ -68,14 +69,15 @@ class App extends React.Component {
   getAllTips = () => {
     requestService
       .getThemeTips()
-      .then(json => this.setState({ themeTips: json }));
+      .then(themeTips => this.setState({ themeTips }));
+    requestService.getThemes().then(themes => this.setState({ themes }));
     requestService
       .getInteractionTips()
-      .then(json => this.setState({ interactionTips: json }));
+      .then(interactionTips => this.setState({ interactionTips }));
   };
 
   render() {
-    const { isAuthenticated, themeTips, interactionTips } = this.state;
+    const { isAuthenticated, themeTips, themes, interactionTips } = this.state;
 
     return (
       <Router>
@@ -101,6 +103,7 @@ class App extends React.Component {
               addedProps={{
                 getAllTips: this.getAllTips,
                 themeTips,
+                themes,
                 interactionTips
               }}
             />

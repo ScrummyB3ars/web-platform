@@ -16,7 +16,7 @@ class Tips extends React.Component {
   }
 
   render() {
-    const { classes, themeTips, interactionTips } = this.props;
+    const { classes, themeTips, themes, interactionTips } = this.props;
 
     if (!themeTips || !interactionTips) {
       return (
@@ -28,7 +28,12 @@ class Tips extends React.Component {
 
     return (
       <div>
-        <Table type="theme" title="Themed tips" tips={themeTips} />
+        <Table
+          type="theme"
+          title="Themed tips"
+          tips={themeTips}
+          themes={themes}
+        />
         <Table
           type="interaction"
           title="Interaction tips"

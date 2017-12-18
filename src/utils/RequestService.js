@@ -27,5 +27,8 @@ export const requestService = {
         zip_code
       })
     });
+  },
+  getThemes() {
+    return fetch(`${this.URL}/themes`).then(response => response.json());
   }
 };
