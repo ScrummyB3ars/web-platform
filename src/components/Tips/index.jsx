@@ -1,12 +1,19 @@
 import React from 'react';
 import { CircularProgress } from 'material-ui/Progress';
 import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
 
 import Table from './Table';
 
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3
+  },
+  addButton: {
+    position: 'fixed',
+    bottom: '2em',
+    right: '2em'
   }
 });
 
@@ -39,6 +46,14 @@ class Tips extends React.Component {
           title="Interaction tips"
           tips={interactionTips}
         />
+        <Button
+          fab
+          color="primary"
+          aria-label="add"
+          className={classes.addButton}
+        >
+          <AddIcon />
+        </Button>
       </div>
     );
   }

@@ -5,12 +5,7 @@ import Input from 'material-ui/Input';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 import Grid from 'material-ui/Grid';
-import {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  InputLabel
-} from 'material-ui';
+import { FormControl, InputLabel } from 'material-ui';
 
 const styles = theme => ({
   select: {
