@@ -21,6 +21,7 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import { Link } from 'react-router-dom';
 
+import { requestService } from '../../utils/RequestService';
 import { capitalizeFirstLetter } from '../../utils/Helpers';
 
 const styles = theme => ({
@@ -63,8 +64,8 @@ class TipTable extends React.Component {
     this.setState({ dialogOpen: false });
   };
 
-  handleTipDelete = () => {
-    // DELETE TIP
+  handleTipDelete = id => {
+    requestService.deleteThemeTip(id);
   };
 
   render() {
@@ -98,16 +99,12 @@ class TipTable extends React.Component {
                       </TableCell>
                       <TableCell>{t.tip_content}</TableCell>
                       <TableCell>
-                        <Link
-                          to={{
-                            pathname: `/tips/${type}/${t.id}`,
-                            state: { tip: t, themes }
-                          }}
+                        <IconButton
+                          component={Link}
+                          to={`/tips/${type}/${t.id}`}
                         >
-                          <IconButton>
-                            <EditIcon />
-                          </IconButton>
-                        </Link>
+                          <EditIcon />
+                        </IconButton>
                         <IconButton onClick={() => this.handleDialogOpen(t)}>
                           <DeleteIcon className={classes.deleteIcon} />
                         </IconButton>
@@ -138,7 +135,7 @@ class TipTable extends React.Component {
             <DialogActions>
               <Button
                 raised
-                onClick={this.handleTipDelete}
+                onClick={() => this.handleTipDelete(dialogTip.id)}
                 className={classes.deleteButton}
               >
                 Delete
@@ -175,16 +172,12 @@ class TipTable extends React.Component {
                     <TableRow key={t.id}>
                       <TableCell>{t.tip_content}</TableCell>
                       <TableCell>
-                        <Link
-                          to={{
-                            pathname: `/tips/${type}/${t.id}`,
-                            state: { tip: t }
-                          }}
+                        <IconButton
+                          component={Link}
+                          to={`/tips/${type}/${t.id}`}
                         >
-                          <IconButton>
-                            <EditIcon />
-                          </IconButton>
-                        </Link>
+                          <EditIcon />
+                        </IconButton>
                         <IconButton onClick={() => this.handleDialogOpen(t)}>
                           <DeleteIcon className={classes.deleteIcon} />
                         </IconButton>
@@ -215,7 +208,7 @@ class TipTable extends React.Component {
             <DialogActions>
               <Button
                 raised
-                onClick={this.handleTipDelete}
+                onClick={() => this.handleTipDelete(dialogTip.id)}
                 className={classes.deleteButton}
               >
                 Delete
