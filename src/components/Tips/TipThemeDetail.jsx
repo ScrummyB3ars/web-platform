@@ -9,6 +9,8 @@ import {
   SelectValidator
 } from 'react-material-ui-form-validator';
 
+import { requestService } from '../../utils/RequestService';
+
 const styles = theme => ({
   select: {
     margin: theme.spacing.unit,
@@ -30,12 +32,14 @@ class Detail extends React.Component {
     if (this.props.addNew) {
       this.state = {
         tip: {
+          picture: 'wolken_1',
           tip_content: '',
           development_goal: '',
           zill_goal: '',
-          rich_language: -1,
+          rich_language: '',
           circumstances: -1,
-          themes_id: -1
+          themes_id: -1,
+          age_group_id: -1
         }
       };
     } else {
@@ -56,10 +60,15 @@ class Detail extends React.Component {
     });
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    if (!this.props.addNew) {
+      requestService.deleteThemeTip(this.state.tip.id);
+    }
+    requestService.addThemeTip(this.state.tip);
+  }
 
   render() {
-    const { themes, classes } = this.props;
+    const { addNew, themes, circumstances, classes } = this.props;
     const { tip } = this.state;
     return (
       <ValidatorForm
@@ -75,7 +84,6 @@ class Detail extends React.Component {
           >
             <TextValidator
               label="Content"
-              fullWidth
               multiline
               name="tip_content"
               value={tip.tip_content}
@@ -90,7 +98,6 @@ class Detail extends React.Component {
             <TextValidator
               label="Development goal"
               name="development_goal"
-              fullWidth
               multiline
               value={tip.development_goal}
               margin="normal"
@@ -103,7 +110,6 @@ class Detail extends React.Component {
             <TextValidator
               label="ZILL goal"
               name="zill_goal"
-              fullWidth
               multiline
               value={tip.zill_goal}
               margin="normal"
@@ -112,17 +118,12 @@ class Detail extends React.Component {
               errorMessages={['this field is required']}
             />
           </FormControl>
-          <FormControl className={classes.select}>
-            <SelectValidator
+          <FormControl fullWidth="true" className={classes.textfield}>
+            <TextValidator
               label="Rich language"
               value={tip.rich_language}
               name="rich_language"
-              children={() => {
-                return <MenuItem>voorspellen</MenuItem>;
-              }}
               onChange={this.handleInputChange}
-              validators={['required']}
-              errorMessages={['this field is required']}
             />
           </FormControl>
           <FormControl className={classes.select}>
@@ -130,9 +131,31 @@ class Detail extends React.Component {
               label="Circumstances"
               value={tip.circumstances}
               name="circumstances"
-              children={() => {
-                return <MenuItem>wolken</MenuItem>;
-              }}
+              children={circumstances.map(c => {
+                return (
+                  <MenuItem key={c} value={c}>
+                    {c}
+                  </MenuItem>
+                );
+              })}
+              onChange={this.handleInputChange}
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+          </FormControl>
+          <FormControl className={classes.select}>
+            <SelectValidator
+              label="Age group"
+              value={tip.age_group_id}
+              name="age_group_id"
+              children={[
+                <MenuItem key={0} value={0}>
+                  jongste
+                </MenuItem>,
+                <MenuItem key={1} value={1}>
+                  oudste
+                </MenuItem>
+              ]}
               onChange={this.handleInputChange}
               validators={['required']}
               errorMessages={['this field is required']}
@@ -157,7 +180,7 @@ class Detail extends React.Component {
           </FormControl>
           <FormControl className={classes.submit}>
             <Button raised color="primary" type="submit">
-              Edit
+              {addNew ? 'Add' : 'Edit'}
             </Button>
           </FormControl>
         </Grid>

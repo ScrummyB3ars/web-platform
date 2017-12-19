@@ -26,9 +26,13 @@ class TipDetail extends React.Component {
       );
     }
 
+    // shitty implementation because this doesn't have a seperate table in database
+    // like themes
+    const circumstances = [...new Set(themeTips.map(tip => tip.circumstances))];
+
     if (id === 'new') {
       return type === 'theme' ? (
-        <TipThemeDetail addNew themes={themes} />
+        <TipThemeDetail addNew themes={themes} circumstances={circumstances} />
       ) : (
         <TipInteractionDetail addNew />
       );
@@ -37,6 +41,7 @@ class TipDetail extends React.Component {
         <TipThemeDetail
           tip={themeTips.filter(t => t.id === parseInt(id, 10))[0]}
           themes={themes}
+          circumstances={circumstances}
         />
       ) : (
         <TipInteractionDetail

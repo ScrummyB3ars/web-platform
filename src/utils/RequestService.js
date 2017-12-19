@@ -30,5 +30,23 @@ export const requestService = {
   },
   getThemes() {
     return fetch(`${this.URL}/themes`).then(response => response.json());
+  },
+  addThemeTip(tip) {
+    fetch(`${this.URL}/theme_tips/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tip)
+    });
+  },
+  deleteThemeTip(id) {
+    fetch(`${this.URL}/theme_tips/delete`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: { id }
+    });
   }
 };
