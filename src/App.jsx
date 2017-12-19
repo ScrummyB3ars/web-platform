@@ -107,7 +107,16 @@ class App extends React.Component {
                 interactionTips
               }}
             />
-            <PrivateRoute path="/tips/:type/:id" component={TipDetail} />
+            <PrivateRoute
+              path="/tips/:type/:id"
+              component={TipDetail}
+              addedProps={{
+                themeTips,
+                themes,
+                interactionTips,
+                getAllTips: this.getAllTips
+              }}
+            />
           </div>
         </div>
       </Router>
