@@ -69,7 +69,7 @@ class Tips extends React.Component {
         >
           <AddIcon />
         </Button>
-        <Dialog open={dialogOpen} onRequestClose={this.handleDialogClose}>
+        <Dialog open={dialogOpen} onRequestClose={this.handleDialogToggle}>
           <DialogTitle>Choose the type of tip you want to add</DialogTitle>
           <DialogActions>
             <Button
