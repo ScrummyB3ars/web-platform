@@ -41,7 +41,7 @@ export const requestService = {
     });
   },
   deleteThemeTip(id) {
-    fetch(`${this.URL}/theme_tips/delete`, {
+    return fetch(`${this.URL}/theme_tips/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
