@@ -35,12 +35,12 @@ class TipDetail extends React.Component {
     } else {
       return type === 'theme' ? (
         <TipThemeDetail
-          tip={themeTips.filter(t => t.id === parseInt(id))[0]}
+          tip={themeTips.filter(t => t.id === parseInt(id, 10))[0]}
           themes={themes}
         />
       ) : (
         <TipInteractionDetail
-          tip={interactionTips.filter(t => t.id === parseInt(id))[0]}
+          tip={interactionTips.filter(t => t.id === parseInt(id, 10))[0]}
         />
       );
     }
