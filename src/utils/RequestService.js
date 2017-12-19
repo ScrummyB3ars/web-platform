@@ -16,7 +16,7 @@ export const requestService = {
       .then(json => json.filter(u => u.email === email)[0]);
   },
   subscribeUser(email, zip_code) {
-    fetch(`${this.URL}/users/add`, {
+    return fetch(`${this.URL}/users/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ export const requestService = {
     return fetch(`${this.URL}/themes`).then(response => response.json());
   },
   addThemeTip(tip) {
-    fetch(`${this.URL}/theme_tips/add`, {
+    return fetch(`${this.URL}/theme_tips/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export const requestService = {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: { id }
+      body: JSON.stringify({ id })
     });
   }
 };
