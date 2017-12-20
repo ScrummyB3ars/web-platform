@@ -7,6 +7,7 @@ import AppBar from './components/AppBar';
 import Home from './components/Home';
 import Login from './components/Login';
 import Subscribe from './components/Subscribe';
+import Unsubscribe from './components/Unsubscribe';
 import Tips from './components/Tips';
 import TipDetail from './components/Tips/TipDetail';
 
@@ -86,6 +87,7 @@ class App extends React.Component {
           <div className="app">
             <Route exact path="/" component={Home} />
             <Route path="/subscribe" component={Subscribe} />
+            <Route path="/unsubscribe" component={Unsubscribe} />
             <Route
               path="/login"
               render={props => (
