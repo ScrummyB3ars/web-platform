@@ -48,5 +48,16 @@ export const requestService = {
       },
       body: JSON.stringify({ id })
     });
+  },
+  deleteSubscriber(email) {
+    return this.getUser(email).then(({ id }) => {
+      return fetch(`${this.URL}/users/delete`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+      });
+    });
   }
 };
