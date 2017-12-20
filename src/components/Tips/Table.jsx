@@ -65,7 +65,9 @@ class TipTable extends React.Component {
   };
 
   handleTipDelete = id => {
-    requestService.deleteThemeTip(id);
+    requestService.deleteThemeTip(id).then(() => {
+      this.handleDialogClose();
+    });
   };
 
   render() {
