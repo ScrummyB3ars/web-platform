@@ -53,7 +53,7 @@ class Subscribe extends React.Component {
               />
             </FormControl>
             <Button type="submit" raised color="primary">
-              Register
+              Subscribe
             </Button>
           </Card>
         </form>
