@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import { MenuItem } from 'material-ui/Menu';
 import Grid from 'material-ui/Grid';
@@ -62,9 +63,16 @@ class Detail extends React.Component {
 
   handleSubmit() {
     if (!this.props.addNew) {
-      requestService.deleteThemeTip(this.state.tip.id);
+      requestService.deleteThemeTip(this.state.tip.id).then(() => {
+        requestService.addThemeTip(this.state.tip).then(() => {
+          this.props.history.push('/tips');
+        });
+      });
+    } else {
+      requestService.addThemeTip(this.state.tip).then(() => {
+        this.props.history.push('/tips');
+      });
     }
-    requestService.addThemeTip(this.state.tip);
   }
 
   render() {
@@ -188,4 +196,4 @@ class Detail extends React.Component {
     );
   }
 }
-export default withStyles(styles)(Detail);
+export default withStyles(styles)(withRouter(Detail));
