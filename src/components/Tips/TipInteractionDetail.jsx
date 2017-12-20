@@ -3,7 +3,6 @@ import TextField from 'material-ui/TextField';
 
 export default props => {
   const { tip } = props;
-  console.log(tip);
   return (
     <div>
       <TextField
