@@ -16,7 +16,8 @@ class TipThemeDetail extends React.Component {
   render() {
     const { tip } = this.state;
     if (tip) {
-      return <div>{tip.tip_content}</div>;
+      return <div><h1>{tip.tip_content} </h1><img src={'https://api-toddlr.herokuapp.com/images/' + tip.picture} alt="toddler img"/></div>
+              ;
     }
     return <div>Loading</div>;
   }
