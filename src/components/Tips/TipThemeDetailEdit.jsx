@@ -25,7 +25,7 @@ const styles = theme => ({
     display: 'block',
     width: '100%'
   },
-  image: {
+  imageContainer: {
     width: '100%',
     display: 'flex',
     'justify-content': 'center',
