@@ -63,8 +63,9 @@ a {
 .detail-card {
   text-align: left;
   margin-top: 2em;
+  max-width: 40em;
 }
 
 .detail-card-media {
-  height: 300px;
+  height: 20em;
 }

@@ -14,7 +14,7 @@ const styles = theme => ({
 const Theme = props => {
   const { tip, classes } = props;
   return (
-    <div>
+    <div className="container-center-items">
       <Card className="detail-card">
         <CardMedia
           image={`https://api-toddlr.herokuapp.com/images/${tip.picture}`}
