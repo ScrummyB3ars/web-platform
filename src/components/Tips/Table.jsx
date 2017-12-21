@@ -103,7 +103,7 @@ class TipTable extends React.Component {
                       <TableCell>
                         <IconButton
                           component={Link}
-                          to={`/tips/${type}/${t.id}`}
+                          to={`/tips/${type}/${t.id}/edit`}
                         >
                           <EditIcon />
                         </IconButton>
@@ -176,7 +176,7 @@ class TipTable extends React.Component {
                       <TableCell>
                         <IconButton
                           component={Link}
-                          to={`/tips/${type}/${t.id}`}
+                          to={`/tips/${type}/${t.id}/edit`}
                         >
                           <EditIcon />
                         </IconButton>

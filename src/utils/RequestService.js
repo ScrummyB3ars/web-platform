@@ -59,5 +59,10 @@ export const requestService = {
         body: JSON.stringify({ id })
       });
     });
+  },
+  getThemeTipById(id) {
+    return fetch(`${this.URL}/theme_tips/${id}`).then(response =>
+      response.json()
+    );
   }
 };

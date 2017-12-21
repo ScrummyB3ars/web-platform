@@ -1,8 +1,8 @@
 import React from 'react';
 import { CircularProgress } from 'material-ui/Progress';
 
-import TipThemeDetail from './TipThemeDetail';
-import TipInteractionDetail from './TipInteractionDetail';
+import TipThemeDetail from './TipThemeDetailEdit';
+import TipInteractionDetail from './TipInteractionDetailEdit';
 
 class TipDetail extends React.Component {
   componentWillMount() {

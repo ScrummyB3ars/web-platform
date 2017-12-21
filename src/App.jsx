@@ -9,7 +9,8 @@ import Login from './components/Login';
 import Subscribe from './components/Subscribe';
 import Unsubscribe from './components/Unsubscribe';
 import Tips from './components/Tips';
-import TipDetail from './components/Tips/TipDetail';
+import TipDetailEdit from './components/Tips/TipDetail';
+import TipDetail from './components/Tips/TipThemeDetail';
 
 import { authService } from './utils/AuthService';
 import { requestService } from './utils/RequestService';
@@ -109,9 +110,10 @@ class App extends React.Component {
                 interactionTips
               }}
             />
+            <Route path="/tips/:type/:id" component={TipDetail} />
             <PrivateRoute
-              path="/tips/:type/:id"
-              component={TipDetail}
+              path="/tips/:type/:id/edit"
+              component={TipDetailEdit}
               addedProps={{
                 themeTips,
                 themes,
