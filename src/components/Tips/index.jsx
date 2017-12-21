@@ -39,7 +39,7 @@ class Tips extends React.Component {
     const { classes, themeTips, themes, interactionTips } = this.props;
     const { dialogOpen } = this.state;
 
-    if (!themeTips || !interactionTips) {
+    if (!themeTips || !interactionTips || !themes) {
       return (
         <div style={{ height: '50vh' }} className="container-center-items">
           <CircularProgress className={classes.progress} size={50} />
