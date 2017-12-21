@@ -69,14 +69,15 @@ class Detail extends React.Component {
   }
 
   handleSubmit() {
+    const { match: { params: { type } } } = this.props;
     if (!this.props.addNew) {
-      requestService.deleteThemeTip(this.state.tip.id).then(() => {
-        requestService.addThemeTip(this.state.tip).then(() => {
+      requestService.deleteTip(type, this.state.tip.id).then(() => {
+        requestService.addTip(type, this.state.tip).then(() => {
           this.props.history.push('/tips');
         });
       });
     } else {
-      requestService.addThemeTip(this.state.tip).then(() => {
+      requestService.addTip(type, this.state.tip).then(() => {
         this.props.history.push('/tips');
       });
     }

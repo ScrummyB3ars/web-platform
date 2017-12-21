@@ -11,13 +11,17 @@ class TipDetail extends React.Component {
     this.state = {
       tip: null
     };
-    requestService
-      .getTipById(props.match.params.type, props.match.params.id)
-      .then(tip => this.setState({ tip }));
+    const { match: { params: { type, id } } } = this.props;
+    if (id !== 'new') {
+      requestService.getTipById(type, id).then(tip => this.setState({ tip }));
+    }
   }
 
   render() {
-    const { match: { params: { type } } } = this.props;
+    const { match: { params: { type, id } } } = this.props;
+    if (id === 'new') {
+      return null;
+    }
     const { tip } = this.state;
 
     if (!tip) {

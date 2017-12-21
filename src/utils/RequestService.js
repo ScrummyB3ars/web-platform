@@ -31,8 +31,8 @@ export const requestService = {
   getThemes() {
     return fetch(`${this.URL}/themes`).then(response => response.json());
   },
-  addThemeTip(tip) {
-    return fetch(`${this.URL}/theme_tips/add`, {
+  addTip(type, tip) {
+    return fetch(`${this.URL}/${type}_tips/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -40,8 +40,8 @@ export const requestService = {
       body: JSON.stringify(tip)
     });
   },
-  deleteThemeTip(id) {
-    return fetch(`${this.URL}/theme_tips/delete`, {
+  deleteTip(type, id) {
+    return fetch(`${this.URL}/${type}_tips/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
