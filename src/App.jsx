@@ -125,6 +125,17 @@ class App extends React.Component {
                 getAllTips: this.getAllTips
               }}
             />
+            <PrivateRoute
+              exact
+              path="/tips/:type/:id"
+              component={TipDetailEdit}
+              addedProps={{
+                themeTips,
+                themes,
+                interactionTips,
+                getAllTips: this.getAllTips
+              }}
+            />
           </div>
           <Route
             exact

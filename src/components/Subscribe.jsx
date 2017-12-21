@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Input, Card, FormControl } from 'material-ui';
+import { withRouter } from 'react-router-dom';
 
 import { requestService } from '../utils/RequestService';
 
@@ -25,7 +26,9 @@ class Subscribe extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { email, zip_code } = this.state;
-    requestService.subscribeUser(email, zip_code);
+    requestService
+      .subscribeUser(email, zip_code)
+      .then(() => this.props.history.push('/'));
   }
 
   render() {
@@ -62,4 +65,4 @@ class Subscribe extends React.Component {
   }
 }
 
-export default Subscribe;
+export default withRouter(Subscribe);
