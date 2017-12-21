@@ -110,7 +110,7 @@ class App extends React.Component {
                 interactionTips
               }}
             />
-            <Route exact path="/tips/:type/:id" component={TipDetailView} />
+            <Route path="/tips/:type/:id" component={TipDetailView} />
             <PrivateRoute
               exact
               path="/tips/:type/new"
@@ -123,6 +123,7 @@ class App extends React.Component {
               }}
             />
             <PrivateRoute
+              exact
               path="/tips/:type/:id/edit"
               component={TipDetailEdit}
               addedProps={{
