@@ -10,7 +10,7 @@ import {
   SelectValidator
 } from 'react-material-ui-form-validator';
 
-import { requestService } from '../../utils/RequestService';
+import { requestService } from '../../../../utils/RequestService';
 
 const styles = theme => ({
   select: {

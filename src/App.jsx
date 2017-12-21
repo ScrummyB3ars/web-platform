@@ -9,9 +9,8 @@ import Login from './components/Login';
 import Subscribe from './components/Subscribe';
 import Unsubscribe from './components/Unsubscribe';
 import Tips from './components/Tips';
-import TipDetailEdit from './components/Tips/TipDetail';
-import TipThemeDetail from './components/Tips/TipThemeDetail';
-import TipInteractionDetail from './components/Tips/TipInteractionDetail';
+import TipDetailEdit from './components/Tips/Detail/Edit';
+import TipDetailView from './components/Tips/Detail/View';
 
 import { authService } from './utils/AuthService';
 import { requestService } from './utils/RequestService';
@@ -111,9 +110,17 @@ class App extends React.Component {
                 interactionTips
               }}
             />
-            <Route
-              path="/tips/interaction/:id/public"
-              component={TipInteractionDetail}
+            <Route exact path="/tips/:type/:id" component={TipDetailView} />
+            <PrivateRoute
+              exact
+              path="/tips/:type/new"
+              component={TipDetailEdit}
+              addedProps={{
+                themeTips,
+                themes,
+                interactionTips,
+                getAllTips: this.getAllTips
+              }}
             />
             <PrivateRoute
               path="/tips/:type/:id/edit"
@@ -125,23 +132,7 @@ class App extends React.Component {
                 getAllTips: this.getAllTips
               }}
             />
-            <PrivateRoute
-              exact
-              path="/tips/:type/:id"
-              component={TipDetailEdit}
-              addedProps={{
-                themeTips,
-                themes,
-                interactionTips,
-                getAllTips: this.getAllTips
-              }}
-            />
           </div>
-          <Route
-            exact
-            path="/tips/theme/:id/public"
-            component={TipThemeDetail}
-          />
         </div>
       </Router>
     );

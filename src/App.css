@@ -59,3 +59,12 @@ a {
   color: #fff;
   text-decoration: none;
 }
+
+.detail-card {
+  text-align: left;
+  margin-top: 2em;
+}
+
+.detail-card-media {
+  height: 300px;
+}

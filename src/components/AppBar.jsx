@@ -45,9 +45,6 @@ const renderLoginLogout = (isAuthenticated, logout, classes) => {
 
 function ButtonAppBar(props) {
   const { classes, isAuthenticated, logout } = props;
-  if (props.location.pathname.includes('public')) {
-    return null;
-  }
   return (
     <div className={classes.root}>
       <AppBar position="static">

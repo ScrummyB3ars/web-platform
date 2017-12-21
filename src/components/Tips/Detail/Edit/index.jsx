@@ -1,8 +1,8 @@
 import React from 'react';
 import { CircularProgress } from 'material-ui/Progress';
 
-import TipThemeDetail from './TipThemeDetailEdit';
-import TipInteractionDetail from './TipInteractionDetailEdit';
+import TipThemeDetail from './Theme';
+import TipInteractionDetail from './Interaction';
 
 class TipDetail extends React.Component {
   componentWillMount() {
@@ -30,7 +30,7 @@ class TipDetail extends React.Component {
     // like themes
     const circumstances = [...new Set(themeTips.map(tip => tip.circumstances))];
 
-    if (id === 'new') {
+    if (!id) {
       return type === 'theme' ? (
         <TipThemeDetail addNew themes={themes} circumstances={circumstances} />
       ) : (
