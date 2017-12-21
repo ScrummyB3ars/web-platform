@@ -111,7 +111,6 @@ class App extends React.Component {
                 interactionTips
               }}
             />
-            <Route path="/tips/theme/:id/public" component={TipThemeDetail} />
             <Route
               path="/tips/interaction/:id/public"
               component={TipInteractionDetail}
@@ -127,6 +126,11 @@ class App extends React.Component {
               }}
             />
           </div>
+          <Route
+            exact
+            path="/tips/theme/:id/public"
+            component={TipThemeDetail}
+          />
         </div>
       </Router>
     );

@@ -5,7 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Dashboard from 'material-ui-icons/Dashboard';
 
 const styles = theme => ({
@@ -45,6 +45,9 @@ const renderLoginLogout = (isAuthenticated, logout, classes) => {
 
 function ButtonAppBar(props) {
   const { classes, isAuthenticated, logout } = props;
+  if (props.location.pathname.includes('public')) {
+    return null;
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -63,4 +66,4 @@ ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(withRouter(ButtonAppBar));
