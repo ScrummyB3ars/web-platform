@@ -60,8 +60,8 @@ export const requestService = {
       });
     });
   },
-  getThemeTipById(id) {
-    return fetch(`${this.URL}/theme_tips/${id}`).then(response =>
+  getTipById(type, id) {
+    return fetch(`${this.URL}/${type}_tips/${id}`).then(response =>
       response.json()
     );
   }

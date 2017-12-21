@@ -2,14 +2,14 @@ import React from 'react';
 
 import { requestService } from '../../utils/RequestService';
 
-class TipThemeDetail extends React.Component {
+class TipInteractionDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       tip: null
     };
     requestService
-      .getTipById('theme', props.match.params.id)
+      .getTipById('interaction', props.match.params.id)
       .then(tip => this.setState({ tip }));
   }
 
@@ -22,4 +22,4 @@ class TipThemeDetail extends React.Component {
   }
 }
 
-export default TipThemeDetail;
+export default TipInteractionDetail;
