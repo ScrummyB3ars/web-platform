@@ -81,7 +81,7 @@ class App extends React.Component {
     const { isAuthenticated, themeTips, themes, interactionTips } = this.state;
 
     return (
-      <Router basename="/web-platform">
+      <Router>
         <div>
           <AppBar isAuthenticated={isAuthenticated} logout={this.logout} />
           <div className="app">
